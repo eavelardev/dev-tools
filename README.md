@@ -3,24 +3,37 @@ Tools for dev stuff
 
 ## Check C/C++ version
 
+During build time
+
 ```C
-#if (__STDC_VERSION__ == 199409L)
-	#pragma message ( "C94" )
-#elif (__STDC_VERSION__ == 199901L)
-	#pragma message ( "C99" )
+#if (__STDC_VERSION__ == 201710L)
+	#pragma message ( "-std=c17" )
 #elif (__STDC_VERSION__ == 201112L)
-	#pragma message ( "C11" )
-#elif (__STDC_VERSION__ == 201710L)
-	#pragma message ( "C18" )
+	#pragma message ( "-std=c11" )
+#elif (__STDC_VERSION__ == 199901L)
+	#pragma message ( "-std=c99" )
 #endif
 
-#if (__cplusplus == 199711L)
-	#pragma message ( "C++98" )
-#elif (__cplusplus == 201103L)
-	#pragma message ( "C++11" )
+#if (__cplusplus == 201703L)
+	#pragma message ("-std=c++17" )
 #elif (__cplusplus == 201402L)
-	#pragma message ( "C++14" )
-#elif (__cplusplus == 201703L)
-	#pragma message ( "C++17" )
+	#pragma message ( "-std=c++14" )
+#elif (__cplusplus == 201103L)
+	#pragma message ( "-std=c++11" )
+#elif (__cplusplus == 199711L)
+	#pragma message ( "-std=c++98" )
 #endif
+```
+
+During execution time
+
+```C
+if (__STDC_VERSION__ == 201710L) printf("-std=c17\n");
+else if (__STDC_VERSION__ == 201112L) printf("-std=c11\n");
+else if (__STDC_VERSION__ == 199901L) printf("-std=c99\n");
+
+if (__cplusplus == 201703L) std::cout << "-std=c++17\n";
+else if (__cplusplus == 201402L) std::cout << "-std=c++14\n";
+else if (__cplusplus == 201103L) std::cout << "-std=c++11\n";
+else if (__cplusplus == 199711L) std::cout << "-std=c++98\n";
 ```
